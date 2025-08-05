@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f792787729b1eb847816b657f7e83677, type: 3}
+  m_Name: creature-102
+  m_EditorClassIdentifier: 
+  cardCode: creature-102
+  cardName: Ario
+  artworkImage: {fileID: 21300000, guid: 336a8c8f91bc63c4cb881254e1373eac, type: 3}
+  tribe: 2
+  rarity: 2
+  courage: 50
+  power: 55
+  wisdom: 25
+  speed: 55
+  energy: 40
+  mugicCounters: 1
+  elements: 01000000
+  abilityDescription: 'Invisibility: Strike 15.'
+  abilityTrigger: 0
+  cardType: Mipedian Royal Warrior
+  cardFlavorText: Though not in his prime, Ario is always primed for battle.
+  cardArtist: Khary Randolph, Anthony Washington
+  isBrainwashed: 0
+  brainwashedEffect: 
+  tribeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flavorText: Though not in his prime, Ario is always primed for battle.
+  creaturePortrait: {fileID: 21300000, guid: 336a8c8f91bc63c4cb881254e1373eac, type: 3}
+  cardSet: DOP
+  cardId: 72/232
+  moveRange: 2
+  isInfected: 0

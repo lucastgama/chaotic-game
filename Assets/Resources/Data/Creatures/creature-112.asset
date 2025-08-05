@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f792787729b1eb847816b657f7e83677, type: 3}
+  m_Name: creature-112
+  m_EditorClassIdentifier: 
+  cardCode: creature-112
+  cardName: Crawsectus
+  artworkImage: {fileID: 21300000, guid: b45748fca6807ba4f84645edc88bad3e, type: 3}
+  tribe: 0
+  rarity: 3
+  courage: 60
+  power: 45
+  wisdom: 40
+  speed: 25
+  energy: 50
+  mugicCounters: 0
+  elements: 0200000003000000
+  abilityDescription: Earth 5.
+  abilityTrigger: 0
+  cardType: OverWorld Elementalist
+  cardFlavorText: His hard exterior hides an even harder interior.
+  cardArtist: Kazutoko Matsumoto
+  isBrainwashed: 0
+  brainwashedEffect: 
+  tribeColor: {r: 0, g: 0, b: 1, a: 1}
+  flavorText: His hard exterior hides an even harder interior.
+  creaturePortrait: {fileID: 21300000, guid: b45748fca6807ba4f84645edc88bad3e, type: 3}
+  cardSet: DOP
+  cardId: 6/232
+  moveRange: 2
+  isInfected: 0

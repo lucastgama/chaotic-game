@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b9b3277ae5956438e9ef406b150b97, type: 3}
+  m_Name: mugic-108
+  m_EditorClassIdentifier: 
+  cardCode: mugic-108
+  cardName: Fortissimo
+  artworkImage: {fileID: 21300000, guid: 968259f4a188e1e4ebeaa50179ef9318, type: 3}
+  rarity: 3
+  tribe: 5
+  cost: 1
+  abilityDescription: Target Creature gains 5 Courage, Power, Wisdom, Speed, and
+    Energy.
+  notes: 2G# 1C# 2E 2C# 2D# 1G 4F#
+  shownotes: 2G#4 1C#5 2E5 2C#5 2D#5 1G#4 4F#5
+  cardType: 
+  cardFlavorText: Large is good. Larger is better. But really, really big is sometimes
+    best.
+  cardArtist: Martin Molski
+  cardPortrait: {fileID: 21300000, guid: 968259f4a188e1e4ebeaa50179ef9318, type: 3}
+  isUnique: 0
+  tags: 
+  exclusive: 
+  altVersion: 
+  isAnimated: 0
+  cardSet: DOP
+  cardId: 167/232

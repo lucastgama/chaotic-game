@@ -1,0 +1,53 @@
+[
+  {
+    "id": "player_001",
+    "nickname": "LucasX",
+    "collection": [
+      { "cardId": "creature-101", "qty": 3 },
+      { "cardId": "creature-104", "qty": 2 },
+      { "cardId": "creature-106", "qty": 1 },
+      { "cardId": "creature-108", "qty": 2 },
+      { "cardId": "creature-111", "qty": 4 },
+      { "cardId": "attack-103", "qty": 2 },
+      { "cardId": "attack-107", "qty": 1 },
+      { "cardId": "attack-115", "qty": 4 },
+      { "cardId": "attack-120", "qty": 3 },
+      { "cardId": "attack-125", "qty": 2 },
+      { "cardId": "attack-133", "qty": 1 },
+      { "cardId": "battlegear-102", "qty": 1 },
+      { "cardId": "battlegear-106", "qty": 3 },
+      { "cardId": "battlegear-109", "qty": 2 },
+      { "cardId": "mugic-001", "qty": 2 },
+      { "cardId": "mugic-003", "qty": 1 },
+      { "cardId": "mugic-006", "qty": 3 },
+      { "cardId": "location-102", "qty": 1 },
+      { "cardId": "location-107", "qty": 2 },
+      { "cardId": "location-110", "qty": 4 }
+    ]
+  },
+  {
+    "id": "player_002",
+    "nickname": "AivennaAI",
+    "collection": [
+      { "cardId": "creature-102", "qty": 1 },
+      { "cardId": "creature-105", "qty": 2 },
+      { "cardId": "creature-107", "qty": 3 },
+      { "cardId": "creature_009", "qty": 1 },
+      { "cardId": "creature_012", "qty": 2 },
+      { "cardId": "attack-102", "qty": 3 },
+      { "cardId": "attack-110", "qty": 1 },
+      { "cardId": "attack-118", "qty": 4 },
+      { "cardId": "attack-127", "qty": 2 },
+      { "cardId": "attack-135", "qty": 1 },
+      { "cardId": "battlegear-101", "qty": 2 },
+      { "cardId": "battlegear-105", "qty": 1 },
+      { "cardId": "battlegear-111", "qty": 4 },
+      { "cardId": "mugic-102", "qty": 2 },
+      { "cardId": "mugic-104", "qty": 3 },
+      { "cardId": "mugic-108", "qty": 1 },
+      { "cardId": "location-103", "qty": 1 },
+      { "cardId": "location-106", "qty": 2 },
+      { "cardId": "location-112", "qty": 4 }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe5c6f38ec85cc4788c9768d40909dd, type: 3}
+  m_Name: location-102
+  m_EditorClassIdentifier: 
+  cardCode: location-102
+  cardName: Castle Pillar
+  artworkImage: {fileID: 21300000, guid: a5e9d51327d01b94fba6eb3681b74aaf, type: 3}
+  rarity: 4
+  initiative: 1
+  abilityDescription: At the beginning of combat, if an engaged Creature has higher
+    Wisdom than the opposing engaged Creature, put a Mugic counter on it.
+  cardType: 
+  cardFlavorText: 
+  cardArtist: Keith Conroy, Emilio Lopez
+  cardPortrait: {fileID: 21300000, guid: a5e9d51327d01b94fba6eb3681b74aaf, type: 3}
+  isUnique: 1
+  tags: 
+  exclusive: 
+  cardSet: DOP
+  cardId: 204/232

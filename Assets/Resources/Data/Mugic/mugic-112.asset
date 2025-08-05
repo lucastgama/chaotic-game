@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b9b3277ae5956438e9ef406b150b97, type: 3}
+  m_Name: mugic-112
+  m_EditorClassIdentifier: 
+  cardCode: mugic-112
+  cardName: Melody of Malady
+  artworkImage: {fileID: 21300000, guid: 8a11b5a28e09a3a4e82c82f19c7351f7, type: 3}
+  rarity: 3
+  tribe: 1
+  cost: 1
+  abilityDescription: Target engaged Creature gains 10 Energy. Deal 5 damage to another
+    target engaged Creature.
+  notes: 2D 1A 3Ab 2E 2F 1Db 4C
+  shownotes: 
+  cardType: 
+  cardFlavorText: "\"A little bit more for me, a little bit less for you. Perfect!\"\n\u2014Zalvar"
+  cardArtist: Jerico Santander
+  cardPortrait: {fileID: 21300000, guid: 8a11b5a28e09a3a4e82c82f19c7351f7, type: 3}
+  isUnique: 0
+  tags: 
+  exclusive: 
+  altVersion: 
+  isAnimated: 0
+  cardSet: DOP
+  cardId: 185/232

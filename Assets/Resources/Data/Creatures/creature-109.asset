@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f792787729b1eb847816b657f7e83677, type: 3}
+  m_Name: creature-109
+  m_EditorClassIdentifier: 
+  cardCode: creature-109
+  cardName: Borth-Majar
+  artworkImage: {fileID: 21300000, guid: 7c028cbe8cc811648bcc72cc0314fc2a, type: 3}
+  tribe: 1
+  rarity: 3
+  courage: 45
+  power: 85
+  wisdom: 85
+  speed: 40
+  energy: 45
+  mugicCounters: 1
+  elements: 
+  abilityDescription: 'Intimidate: Power 10.
+
+    Intimidate: Wisdom 10.'
+  abilityTrigger: 0
+  cardType: UnderWorld Commander
+  cardFlavorText: "Brains or Brawn? One can\u2019t decide ... and one doesn\u2019t
+    need to."
+  cardArtist: Khary Randolph, Reggie Butler
+  isBrainwashed: 0
+  brainwashedEffect: 
+  tribeColor: {r: 1, g: 0, b: 0, a: 1}
+  flavorText: "Brains or Brawn? One can\u2019t decide ... and one doesn\u2019t need
+    to."
+  creaturePortrait: {fileID: 21300000, guid: 7c028cbe8cc811648bcc72cc0314fc2a, type: 3}
+  cardSet: DOP
+  cardId: 30/232
+  moveRange: 2
+  isInfected: 0

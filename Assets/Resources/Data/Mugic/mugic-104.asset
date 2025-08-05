@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b9b3277ae5956438e9ef406b150b97, type: 3}
+  m_Name: mugic-104
+  m_EditorClassIdentifier: 
+  cardCode: mugic-104
+  cardName: Decrescendo
+  artworkImage: {fileID: 21300000, guid: 074183fb69ca2ae4099b08358ce8fba8, type: 3}
+  rarity: 0
+  tribe: 5
+  cost: 1
+  abilityDescription: Deal 5 damage to target Creature.
+  notes: 2G 1G 1F 2Eb 2Eb 1C 4D
+  shownotes: 
+  cardType: 
+  cardFlavorText: Minimalism to the max.
+  cardArtist: Jerico Santander
+  cardPortrait: {fileID: 21300000, guid: 074183fb69ca2ae4099b08358ce8fba8, type: 3}
+  isUnique: 0
+  tags: 
+  exclusive: Starter
+  altVersion: 
+  isAnimated: 0
+  cardSet: DOP
+  cardId: 165/232

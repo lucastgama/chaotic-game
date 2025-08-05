@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f792787729b1eb847816b657f7e83677, type: 3}
+  m_Name: creature-111
+  m_EditorClassIdentifier: 
+  cardCode: creature-111
+  cardName: Chaor
+  artworkImage: {fileID: 21300000, guid: 18ddaecfe902588408839214d7bc86d3, type: 3}
+  tribe: 1
+  rarity: 4
+  courage: 95
+  power: 90
+  wisdom: 70
+  speed: 60
+  energy: 70
+  mugicCounters: 3
+  elements: 00000000
+  abilityDescription: '{{MC}}{{MC}}{{MC}}: Negate target OverWorld Mugic or ability
+    that targets Chaor.'
+  abilityTrigger: 0
+  cardType: UnderWorld Conqueror Warrior
+  cardFlavorText: "\"We\u2019ll take Kiru City, and the UnderWorld will rule all
+    of Perim!\" - Chaor"
+  cardArtist: Khary Randolph, Anthony Washington
+  isBrainwashed: 0
+  brainwashedEffect: 
+  tribeColor: {r: 1, g: 0, b: 0, a: 1}
+  flavorText: "\"We\u2019ll take Kiru City, and the UnderWorld will rule all of Perim!\"
+    - Chaor"
+  creaturePortrait: {fileID: 21300000, guid: 18ddaecfe902588408839214d7bc86d3, type: 3}
+  cardSet: DOP
+  cardId: 31/232
+  moveRange: 2
+  isInfected: 0

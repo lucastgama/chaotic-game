@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22635550cb1a09b45bef3058e5e61b7c, type: 3}
+  m_Name: attack-102
+  m_EditorClassIdentifier: 
+  cardCode: attack-102
+  cardName: Ash Torrent
+  artworkImage: {fileID: 21300000, guid: 4ed32144d745ca247bd082536fd75ccf, type: 3}
+  rarity: 1
+  buildPoints: 1
+  baseDamage: 0
+  fireDamage: 5
+  airDamage: 0
+  earthDamage: 5
+  waterDamage: 0
+  abilityDescription: 'Challenge Power 15: Deal 10 damage. (Compare the Discipline
+    of the Creature that played this Attack with the opposing engaged Creature. If
+    yours has that amount or more higher, deal the damage.)'
+  cardType: 
+  cardFlavorText: 
+  cardArtist: Andrew Bradshaw, Etienne St.Laurent
+  cardPortrait: {fileID: 21300000, guid: 4ed32144d745ca247bd082536fd75ccf, type: 3}
+  isUnique: 0
+  tags: 
+  exclusive: Starter
+  cardSet: DOP
+  cardId: 88/232

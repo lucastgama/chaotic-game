@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22635550cb1a09b45bef3058e5e61b7c, type: 3}
+  m_Name: attack-103
+  m_EditorClassIdentifier: 
+  cardCode: attack-103
+  cardName: Coil Crush
+  artworkImage: {fileID: 21300000, guid: fa406df5062963248bcfa1fdd40898f5, type: 3}
+  rarity: 3
+  buildPoints: 3
+  baseDamage: 5
+  fireDamage: 0
+  airDamage: 0
+  earthDamage: 0
+  waterDamage: 0
+  abilityDescription: 'Stat Check Power 75: Choose a Battlegear equipped to an opposing
+    Creature and destroy it.'
+  cardType: 
+  cardFlavorText: 
+  cardArtist: 'David Rodriguez, Edwin Nebres, David Curiel '
+  cardPortrait: {fileID: 21300000, guid: fa406df5062963248bcfa1fdd40898f5, type: 3}
+  isUnique: 0
+  tags: 
+  exclusive: 
+  cardSet: DOP
+  cardId: 89/232

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f792787729b1eb847816b657f7e83677, type: 3}
+  m_Name: creature-101
+  m_EditorClassIdentifier: 
+  cardCode: creature-101
+  cardName: Arias
+  artworkImage: {fileID: 21300000, guid: 1a507b7038ee3ec4d9b3654743d8a899, type: 3}
+  tribe: 0
+  rarity: 0
+  courage: 55
+  power: 65
+  wisdom: 30
+  speed: 55
+  energy: 50
+  mugicCounters: 0
+  elements: 02000000
+  abilityDescription: 'Support: Power 5.'
+  abilityTrigger: 0
+  cardType: OverWorld Warrior
+  cardFlavorText: If you think he looks angry now, you should have been at the nose-piercing!
+  cardArtist: Khary Randolph, John Rauch
+  isBrainwashed: 0
+  brainwashedEffect: 
+  tribeColor: {r: 0, g: 0, b: 1, a: 1}
+  flavorText: If you think he looks angry now, you should have been at the nose-piercing!
+  creaturePortrait: {fileID: 21300000, guid: 1a507b7038ee3ec4d9b3654743d8a899, type: 3}
+  cardSet: DOP
+  cardId: 1/232
+  moveRange: 2
+  isInfected: 0

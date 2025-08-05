@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b9b3277ae5956438e9ef406b150b97, type: 3}
+  m_Name: mugic-111
+  m_EditorClassIdentifier: 
+  cardCode: mugic-111
+  cardName: Interlude of Consequence
+  artworkImage: {fileID: 21300000, guid: 256d26ae308428f4da66a4b23771f59b, type: 3}
+  rarity: 3
+  tribe: 5
+  cost: 1
+  abilityDescription: Shuffle target player's Attack Deck or Location Deck.
+  notes: 3C 3Gb 3F 1G 2Ab 1Bb 4C
+  shownotes: 
+  cardType: 
+  cardFlavorText: In desperate situations, turmoil and confusion can be one's allies.
+  cardArtist: Karol Kolodzinski
+  cardPortrait: {fileID: 21300000, guid: 256d26ae308428f4da66a4b23771f59b, type: 3}
+  isUnique: 0
+  tags: 
+  exclusive: Starter
+  altVersion: 
+  isAnimated: 0
+  cardSet: DOP
+  cardId: 169/232

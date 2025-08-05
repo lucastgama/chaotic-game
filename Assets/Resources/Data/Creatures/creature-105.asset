@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f792787729b1eb847816b657f7e83677, type: 3}
+  m_Name: creature-105
+  m_EditorClassIdentifier: 
+  cardCode: creature-105
+  cardName: Biondu
+  artworkImage: {fileID: 21300000, guid: be2cf488e73fdc54ea651105995a1a69, type: 3}
+  tribe: 2
+  rarity: 0
+  courage: 45
+  power: 40
+  wisdom: 30
+  speed: 35
+  energy: 40
+  mugicCounters: 1
+  elements: 00000000
+  abilityDescription: 'Invisibility: Strike 15.'
+  abilityTrigger: 0
+  cardType: Mipedian Elite
+  cardFlavorText: The Mipedian desert may be home, but Biondu covets the land beyond
+    the sand.
+  cardArtist: Andrew Bradshaw, Anthony Washington
+  isBrainwashed: 0
+  brainwashedEffect: 
+  tribeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  flavorText: The Mipedian desert may be home, but Biondu covets the land beyond
+    the sand.
+  creaturePortrait: {fileID: 21300000, guid: be2cf488e73fdc54ea651105995a1a69, type: 3}
+  cardSet: DOP
+  cardId: 73/232
+  moveRange: 2
+  isInfected: 0
