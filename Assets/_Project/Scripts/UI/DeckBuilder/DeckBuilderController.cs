@@ -191,15 +191,16 @@ public class DeckBuilderController : MonoBehaviour
         {
             if (entry.cardId.StartsWith(cardType))
             {
-                CreateCardUI(entry);
+                // CreateCardUI(entry);
+                Debug.Log($"Criando UI para {cardType} com ID: {entry.cardId}");
             }
         }
     }
 
     void CreateCardUI(CollectionEntry entry)
     {
-        string path = "";
         ScriptableObject card = null;
+        string path = "";
 
         if (entry.cardId.StartsWith("creature"))
         {
@@ -229,41 +230,23 @@ public class DeckBuilderController : MonoBehaviour
 
         if (card == null)
         {
+            Debug.LogWarning($"[DeckBuilder] Carta '{entry.cardId}' não encontrada em {path}");
             return;
         }
 
         GameObject cardUI = Instantiate(creatureCardUIPrefab, creatureCardContainer);
-        CardView cardView = cardUI.GetComponent<CardView>();
-        Debug.Log($"sssssssssssssssssssssssssssssssssssss: {cardView}");
-        if (cardView != null)
+
+        CardDraggable draggable = cardUI.GetComponent<CardDraggable>();
+        if (draggable != null)
         {
-            cardView.cardAsset = card;
+            draggable.cardAsset = card;
+            draggable.quantity = entry.qty;
         }
 
-        var imageTransform = cardUI.transform;
-        var teste = cardUI.transform;
-        if (imageTransform != null)
+        CardViewerBuild viewer = cardUI.GetComponent<CardViewerBuild>();
+        if (viewer != null)
         {
-            var imageComponent = imageTransform.GetComponent<Image>();
-            Sprite artwork = null;
-
-            if (card is Creature creature)
-                artwork = creature.artworkImage;
-            else if (card is Attack attack)
-                artwork = attack.artworkImage;
-            else if (card is Battlegear battlegear)
-                artwork = battlegear.artworkImage;
-            else if (card is Location location)
-                artwork = location.artworkImage;
-            else if (card is Mugic mugic)
-                artwork = mugic.artworkImage;
-
-            if (imageComponent != null && artwork != null)
-                imageComponent.sprite = artwork;
-
-            var rawImage = imageTransform.GetComponent<RawImage>();
-            if (rawImage != null && artwork != null)
-                rawImage.texture = artwork.texture;
+            viewer.Initialize(card, entry.qty);
         }
     }
 }

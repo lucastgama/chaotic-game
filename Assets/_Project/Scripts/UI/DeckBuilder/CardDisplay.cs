@@ -15,9 +15,5 @@ public class CardDisplay : MonoBehaviour
             artwork.sprite = creature.artworkImage;
             nameText.text = creature.cardName;
         }
-        else
-        {
-            Debug.LogWarning($"Carta com ID {cardId} não encontrada!");
-        }
     }
 }

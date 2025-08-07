@@ -16,10 +16,7 @@ public class CardInspectorTrigger : MonoBehaviour, IPointerClickHandler
             {
                 cardAsset = view.cardAsset;
             }
-            else
-            {
-                Debug.LogWarning("CardView não encontrado no prefab.");
-            }
+
             ShowCardData();
         }
     }
