@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class DeckBuilderController : MonoBehaviour
 {
     [Header("Botões de Categoria (ainda não usados)")]
-    public Button creaturesButton;
-    public Button attacksButton;
-    public Button battleGearButton;
-    public Button mugicButton;
-    public Button locationsButton;
     public Button allCardsButton;
+    public Button creaturesButton;
+    public Button battleGearButton;
+    public Button attacksButton;
+    public Button locationsButton;
+    public Button mugicButton;
 
     [Header("UI Prefab e Container")]
     public GameObject creatureCardUIPrefab;
@@ -247,6 +247,19 @@ public class DeckBuilderController : MonoBehaviour
         if (viewer != null)
         {
             viewer.Initialize(card, entry.qty);
+        }
+    }
+
+    public void UpdateCardQuantity(string cardId)
+    {
+        Debug.Log("Fui chamado");
+        var entry = playerData.collection.Find(e => e.cardId == cardId);
+
+        if (entry != null && entry.qty > 0)
+        {
+            entry.qty--;
+            Debug.Log($"Quantidade da carta '{cardId}' agora é {entry.qty}");
+            ShowAllCards();
         }
     }
 }

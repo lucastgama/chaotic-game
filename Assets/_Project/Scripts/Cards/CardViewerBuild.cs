@@ -12,12 +12,15 @@ public class CardViewerBuild : MonoBehaviour
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI energyText;
     public TextMeshProUGUI quantityText;
+    public Button removeBtn;
 
     public ScriptableObject cardAsset;
 
-    public void Initialize(ScriptableObject asset, int quantity = 0)
+    public void Initialize(ScriptableObject asset, int quantity = 0, bool isDropZone = false)
     {
         cardAsset = asset;
+        removeBtn.transform.gameObject.SetActive(isDropZone);
+        quantityText.transform.parent.gameObject.SetActive(!isDropZone);
         UpdateCardView(quantity);
     }
 

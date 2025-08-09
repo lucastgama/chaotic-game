@@ -5,129 +5,52 @@ using UnityEngine.UI;
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Slot Configuration")]
-    public string assignedCardId;
-    public Image slotImage;
-    public bool acceptOnlyCreatures = false;
-
-    [Header("Card Display Components")]
-    public GameObject cardDisplayPrefab;
+    public string assignedCreatureId;
+    public DropZoneType acceptOnlyCardType;
+    public DeckBuilderController deckBuilderController;
+    public string dropZoneId;
 
     private GameObject currentCardDisplay;
     private ScriptableObject currentCardAsset;
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log($"[DROPZONE] DropZone '{gameObject.name}' recebeu algo!");
-
-        if (eventData.pointerDrag == null)
-        {
-            Debug.LogWarning("[DROPZONE] Nenhum objeto sendo arrastado!");
-            return;
-        }
-
-        CardDraggable draggable = eventData.pointerDrag.GetComponent<CardDraggable>();
+        var draggable = eventData.pointerDrag.GetComponent<CardDraggable>();
         if (draggable == null)
-        {
-            Debug.LogWarning("[DROPZONE] Objeto não tem CardDraggable.");
             return;
-        }
 
-        Debug.Log($"[DROPZONE] Quantidade disponível: {draggable.quantity}");
+        if (!CardMatchesDropZone(draggable.cardAsset))
+            return;
+
+        if (IsOccupied())
+            return;
 
         if (draggable.quantity <= 0)
-        {
-            Debug.LogWarning("[DROPZONE] Carta sem quantidade disponível.");
             return;
-        }
 
-        if (!string.IsNullOrEmpty(assignedCardId))
-        {
-            Debug.LogWarning($"[DROPZONE] Slot já ocupado com '{assignedCardId}'");
-            return;
-        }
-
-        if (acceptOnlyCreatures && !(draggable.cardAsset is Creature))
-        {
-            Debug.LogWarning("[DROPZONE] Este slot aceita apenas criaturas!");
-            return;
-        }
-
-        assignedCardId = GetCardId(draggable.cardAsset);
         currentCardAsset = draggable.cardAsset;
+        assignedCreatureId = GetCardCode(currentCardAsset);
 
-        CreateCardDisplay();
+        currentCardDisplay = Instantiate(draggable.gameObject, transform);
 
-        draggable.DecreaseQuantity();
+        Destroy(currentCardDisplay.GetComponent<CardDraggable>());
 
-        Debug.Log(
-            $"[DROPZONE] Carta '{assignedCardId}' colocada no slot '{gameObject.name}' com sucesso!"
-        );
-    }
-
-    void CreateCardDisplay()
-    {
-        if (currentCardDisplay != null)
+        var viewer = currentCardDisplay.GetComponent<CardViewerBuild>();
+        if (viewer != null)
         {
-            Destroy(currentCardDisplay);
+            viewer.Initialize(currentCardAsset, 1, true);
+            RectTransform rect = viewer.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            draggable.DecreaseQuantity();
+            viewer.removeBtn.onClick.AddListener(() => OnRemoveCard(viewer, draggable));
         }
 
-        if (cardDisplayPrefab != null)
+        if (deckBuilderController != null)
         {
-            currentCardDisplay = Instantiate(cardDisplayPrefab, transform);
-            CardView cardView = currentCardDisplay.GetComponent<CardView>();
-            if (cardView != null)
-            {
-                cardView.cardAsset = currentCardAsset;
-            }
+            // deckBuilderController.UpdateCardQuantity(assignedCreatureId);
         }
-        else if (slotImage != null)
-        {
-            SetSlotImage();
-        }
-
-        if (currentCardDisplay != null)
-        {
-            RectTransform cardRect = currentCardDisplay.GetComponent<RectTransform>();
-            if (cardRect != null)
-            {
-                cardRect.anchoredPosition = Vector2.zero;
-                cardRect.localScale = Vector3.one;
-
-                RectTransform slotRect = GetComponent<RectTransform>();
-                if (slotRect != null)
-                {
-                    cardRect.sizeDelta = slotRect.sizeDelta * 0.9f; // 90% do tamanho do slot nao sei se quero isso, arrumar 
-                }
-            }
-        }
-    }
-
-    void SetSlotImage()
-    {
-        if (slotImage != null && currentCardAsset != null)
-        {
-            Sprite cardSprite = GetCardSprite(currentCardAsset);
-            if (cardSprite != null)
-            {
-                slotImage.sprite = cardSprite;
-                slotImage.color = Color.white;
-            }
-        }
-    }
-
-    Sprite GetCardSprite(ScriptableObject card)
-    {
-        if (card is Creature c)
-            return c.artworkImage;
-        if (card is Attack a)
-            return a.artworkImage;
-        if (card is Battlegear b)
-            return b.artworkImage;
-        if (card is Location l)
-            return l.artworkImage;
-        if (card is Mugic m)
-            return m.artworkImage;
-        return null;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -140,46 +63,67 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         Debug.Log($"[DROPZONE] Mouse saiu da dropzone '{gameObject.name}'");
     }
 
-    string GetCardId(ScriptableObject card)
+    string GetCardCode(ScriptableObject card)
     {
         if (card is Creature c)
-            return c.cardCode ?? c.name;
+            return c.cardCode;
         if (card is Attack a)
-            return a.cardCode ?? a.name;
+            return a.cardCode;
         if (card is Battlegear b)
-            return b.cardCode ?? b.name;
+            return b.cardCode;
         if (card is Location l)
-            return l.cardCode ?? l.name;
+            return l.cardCode;
         if (card is Mugic m)
-            return m.cardCode ?? m.name;
-        return "unknown";
-    }
-
-    public void ClearSlot()
-    {
-        assignedCardId = "";
-        currentCardAsset = null;
-
-        if (currentCardDisplay != null)
-        {
-            Destroy(currentCardDisplay);
-            currentCardDisplay = null;
-        }
-
-        if (slotImage != null)
-        {
-            slotImage.sprite = null;
-            slotImage.color = new Color(1, 1, 1, 0.3f);
-        }
-    }
-
-    public ScriptableObject GetCardAsset()
-    {
-        return currentCardAsset;
+            return m.cardCode;
+        return "Unknown";
     }
 
     public bool IsOccupied()
     {
-        return !string.IsNullOrEmpty(assignedCardId) && currentCardAsset != null;
+        return !string.IsNullOrEmpty(assignedCreatureId) && currentCardAsset != null;
     }
+
+    public void OnRemoveCard(CardViewerBuild viewer, CardDraggable draggable)
+    {
+        if (viewer != null)
+        {
+            Destroy(viewer.gameObject);
+            draggable.IncrementQuantity();
+            assignedCreatureId = null;
+            currentCardAsset = null;
+            IsOccupied();
+        }
+        //argument CardDraggable draggable
+        // if (draggable != null)
+        // {
+        //     draggable.ResetPosition();
+        // }
+    }
+
+    private bool CardMatchesDropZone(ScriptableObject cardAsset)
+    {
+        switch (acceptOnlyCardType)
+        {
+            case DropZoneType.Creature:
+                return cardAsset is Creature;
+            case DropZoneType.Battlegear:
+                return cardAsset is Battlegear;
+            case DropZoneType.Attack:
+                return cardAsset is Attack;
+            case DropZoneType.Location:
+                return cardAsset is Location;
+            case DropZoneType.Mugic:
+                return cardAsset is Mugic;
+        }
+        return false;
+    }
+}
+
+public enum DropZoneType
+{
+    Creature,
+    Battlegear,
+    Attack,
+    Location,
+    Mugic,
 }

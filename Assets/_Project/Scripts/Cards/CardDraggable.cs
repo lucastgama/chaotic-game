@@ -110,10 +110,19 @@ public class CardDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         UpdateVisual();
     }
 
+    public void IncrementQuantity()
+    {
+        quantity++;
+        UpdateVisual();
+    }
+
     void UpdateVisual()
     {
         var img = GetComponent<Image>();
-        if (img != null)
-            img.color = quantity > 0 ? Color.white : new Color(0.5f, 0.5f, 0.5f);
+        if (img != null && quantity == 0)
+            img.color = new Color(0.1f, 0.1f, 0.1f);
+
+        if (quantity > 0 && img != null)
+            img.color = Color.white;
     }
 }
