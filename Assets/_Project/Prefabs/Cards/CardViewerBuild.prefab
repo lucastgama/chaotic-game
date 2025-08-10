@@ -540,7 +540,6 @@ GameObject:
   - component: {fileID: 542825372054767689}
   - component: {fileID: 1008671598876698932}
   - component: {fileID: -7047365852356062432}
-  - component: {fileID: 3930744972254619093}
   - component: {fileID: 440310667768241847}
   m_Layer: 0
   m_Name: CardViewerBuild
@@ -605,19 +604,6 @@ MonoBehaviour:
   cardAsset: {fileID: 0}
   quantity: 0
   dragVisualPrefab: {fileID: 4016807004917564154, guid: c0b23252782419e4eac5d7b8b1be661e, type: 3}
---- !u!114 &3930744972254619093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3411042244706645980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad62299b8f76e4746beb984083bed693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardAsset: {fileID: 0}
 --- !u!114 &440310667768241847
 MonoBehaviour:
   m_ObjectHideFlags: 0

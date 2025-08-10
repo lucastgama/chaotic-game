@@ -118,11 +118,15 @@ public class CardDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     void UpdateVisual()
     {
-        var img = GetComponent<Image>();
-        if (img != null && quantity == 0)
-            img.color = new Color(0.1f, 0.1f, 0.1f);
+        var images = GetComponentsInChildren<Image>();
+        if (images != null)
+        {
+            Color colorToSet = quantity > 0 ? Color.white : new Color(0.1f, 0.1f, 0.1f);
 
-        if (quantity > 0 && img != null)
-            img.color = Color.white;
+            foreach (var img in images)
+            {
+                img.color = colorToSet;
+            }
+        }
     }
 }

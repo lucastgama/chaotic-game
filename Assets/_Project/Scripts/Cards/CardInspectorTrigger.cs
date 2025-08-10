@@ -11,7 +11,7 @@ public class CardInspectorTrigger : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            CardView view = GetComponent<CardView>();
+            CardViewerBuild view = GetComponent<CardViewerBuild>();
             if (view != null)
             {
                 cardAsset = view.cardAsset;
