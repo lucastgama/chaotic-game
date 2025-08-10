@@ -191,7 +191,7 @@ public class DeckBuilderController : MonoBehaviour
         {
             if (entry.cardId.StartsWith(cardType))
             {
-                // CreateCardUI(entry);
+                CreateCardUI(entry);
                 Debug.Log($"Criando UI para {cardType} com ID: {entry.cardId}");
             }
         }
