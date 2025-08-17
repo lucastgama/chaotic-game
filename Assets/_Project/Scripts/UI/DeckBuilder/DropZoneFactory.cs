@@ -16,14 +16,15 @@ public class DropZoneFactory : MonoBehaviour
     public float verticalSpacingMultiplier = 1.0f;
 
     [Header("Battle Mode")]
-    public int battleMode;
+    private int battleMode;
 
     [Header("Offsets")]
     public float battlegearOffsetY = 20f;
     public float battlegearOffsetX = -10f;
 
-    void Awake()
+    void Start()
     {
+        battleMode = GameManager.Instance.GetMaxCreaturesPerPlayer();
         CreateGrid();
     }
 

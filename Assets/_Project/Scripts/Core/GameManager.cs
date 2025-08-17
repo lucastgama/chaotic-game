@@ -22,10 +22,6 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-    }
-
-    private void Start()
-    {
         SetGameState(startingState);
         SetBattleMode(battleMode);
     }
@@ -33,13 +29,11 @@ public class GameManager : MonoBehaviour
     public void SetGameState(GameState newState)
     {
         CurrentState = newState;
-        Debug.Log("Game State changed to: " + CurrentState);
     }
 
     public void SetBattleMode(BattleMode newBattleMode)
     {
         CurrentBattleMode = newBattleMode;
-        Debug.Log("Battle Mode changed to: " + CurrentBattleMode);
     }
 
     public int GetMaxCreaturesPerPlayer()

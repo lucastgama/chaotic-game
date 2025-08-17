@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
         {
             rotationX = 0;
             rotationY = 90;
-            distance = 1.5f;
+            distance = 10.0f;
         }
 
         if (Input.GetMouseButton(1))

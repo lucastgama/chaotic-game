@@ -29,6 +29,7 @@ public class DeckManager : MonoBehaviour
     public int currentAttackCards = 0;
     public int currentLocationCards = 0;
     public int currentCreatureCards = 0;
+    public int currentBattlegearCards = 0;
 
     void Update()
     {
@@ -128,6 +129,7 @@ public class DeckManager : MonoBehaviour
         currentAttackCards = GetCardTypeCount("attack");
         currentLocationCards = GetCardTypeCount("location");
         currentCreatureCards = GetCardTypeCount("creature");
+        currentBattlegearCards = GetCardTypeCount("battlegear");
     }
 
     private int CalculateTotalBuildPoints()
@@ -205,10 +207,13 @@ public class DeckManager : MonoBehaviour
 
     public bool IsDeckValid()
     {
+        int battleMode = GameManager.Instance.GetMaxCreaturesPerPlayer();
         return currentBuildPoints <= buildPointLimit
             && currentAttackCards == attackCardLimit
             && currentLocationCards <= locationCardLimit
-            && GetCardTypeCount("mugic") <= currentCreatureCards;
+            && GetCardTypeCount("mugic") <= currentCreatureCards
+            && currentBattlegearCards == battleMode
+            && currentCreatureCards == battleMode;
     }
 
     public string GetDeckValidationMessage()
@@ -234,4 +239,5 @@ public class DeckManager : MonoBehaviour
 
         return issues.Count > 0 ? string.Join("\n", issues) : "Deck válido!";
     }
+    
 }

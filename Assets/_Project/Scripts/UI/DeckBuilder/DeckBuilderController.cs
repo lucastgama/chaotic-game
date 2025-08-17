@@ -21,6 +21,9 @@ public class DeckBuilderController : MonoBehaviour
 
     private PlayerData playerData;
 
+    [Header("Iniciar jogo")]
+    public Button startGameButton;
+
     void Start()
     {
         LoadPlayerData();
@@ -56,17 +59,17 @@ public class DeckBuilderController : MonoBehaviour
 
         if (allCardsButton != null)
             allCardsButton.onClick.AddListener(() => ShowAllCards());
+
+        if (startGameButton != null)
+            startGameButton.onClick.AddListener(() => startGame());
     }
 
     void PrintCollectionToConsole()
     {
         if (playerData == null || playerData.collection == null)
         {
-            Debug.LogWarning("Coleção está vazia ou não carregada.");
             return;
         }
-
-        Debug.Log($"Coleção de {playerData.nickname}:");
 
         foreach (var entry in playerData.collection)
         {
@@ -192,7 +195,6 @@ public class DeckBuilderController : MonoBehaviour
             if (entry.cardId.StartsWith(cardType))
             {
                 CreateCardUI(entry);
-                Debug.Log($"Criando UI para {cardType} com ID: {entry.cardId}");
             }
         }
     }
@@ -230,7 +232,6 @@ public class DeckBuilderController : MonoBehaviour
 
         if (card == null)
         {
-            Debug.LogWarning($"[DeckBuilder] Carta '{entry.cardId}' não encontrada em {path}");
             return;
         }
 
@@ -252,14 +253,26 @@ public class DeckBuilderController : MonoBehaviour
 
     public void UpdateCardQuantity(string cardId)
     {
-        Debug.Log("Fui chamado");
         var entry = playerData.collection.Find(e => e.cardId == cardId);
 
         if (entry != null && entry.qty > 0)
         {
             entry.qty--;
-            Debug.Log($"Quantidade da carta '{cardId}' agora é {entry.qty}");
             ShowAllCards();
+        }
+    }
+
+    public void startGame()
+    {
+        //validar se todas as cartas foram adicionadas de acordo com a necessidade do gameplayer
+        // bool isDeckValid = DeckManager.Instance.IsDeckValid();
+        // Debug.Log(isDeckValid);
+
+        DeckManager deckManager = FindFirstObjectByType<DeckManager>();
+        bool isDeckValid = deckManager.IsDeckValid();
+        if (isDeckValid)
+        {
+            GameManager.Instance.SetGameState(GameState.BattlePhase);
         }
     }
 }
