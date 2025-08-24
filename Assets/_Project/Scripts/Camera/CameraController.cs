@@ -29,8 +29,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float maxDistance = 5.0f;
 
-    private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
+    public float rotationX = 0.0f;
+    public float rotationY = 0.0f;
     private Vector3 currentRotation;
     private Vector3 smoothVelocity = Vector3.zero;
 
@@ -48,9 +48,9 @@ public class CameraController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            rotationX = 0;
+            rotationX = 270;
             rotationY = 90;
-            distance = 10.0f;
+            distance = 10.5f;
         }
 
         if (Input.GetMouseButton(1))

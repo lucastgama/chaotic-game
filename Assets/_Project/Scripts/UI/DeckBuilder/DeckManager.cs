@@ -239,5 +239,4 @@ public class DeckManager : MonoBehaviour
 
         return issues.Count > 0 ? string.Join("\n", issues) : "Deck válido!";
     }
-    
 }

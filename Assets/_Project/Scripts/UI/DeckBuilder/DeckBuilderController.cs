@@ -26,9 +26,40 @@ public class DeckBuilderController : MonoBehaviour
 
     void Start()
     {
+        ShowInterface();
         LoadPlayerData();
         SetupButtonListeners();
         ShowAllCards();
+    }
+
+    void ShowInterface()
+    {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("GameManager.Instance é null!");
+            return;
+        }
+
+        var currentState = GameManager.Instance.CurrentState;
+        var battleMode = GameManager.Instance.battleMode;
+        var currentBattleMode = GameManager.Instance.CurrentBattleMode;
+
+        Debug.Log($"Estado atual: {currentState}");
+        Debug.Log($"BattleMode: {battleMode}");
+        Debug.Log($"CurrentBattleMode: {currentBattleMode}");
+
+        bool shouldShowObject = currentState == GameState.DeckSetup;
+
+        if (shouldShowObject)
+        {
+            this.gameObject.SetActive(true);
+            Debug.Log("Mostrando interface do DeckBuilder");
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+            Debug.Log("Escondendo interface do DeckBuilder");
+        }
     }
 
     void LoadPlayerData()
@@ -264,15 +295,12 @@ public class DeckBuilderController : MonoBehaviour
 
     public void startGame()
     {
-        //validar se todas as cartas foram adicionadas de acordo com a necessidade do gameplayer
-        // bool isDeckValid = DeckManager.Instance.IsDeckValid();
-        // Debug.Log(isDeckValid);
-
         DeckManager deckManager = FindFirstObjectByType<DeckManager>();
         bool isDeckValid = deckManager.IsDeckValid();
-        if (isDeckValid)
+        if (true)
         {
             GameManager.Instance.SetGameState(GameState.BattlePhase);
+            Destroy(this.gameObject);
         }
     }
 }

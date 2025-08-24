@@ -5,13 +5,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Game State")]
-    public GameState startingState = GameState.DeckSetup;
+    [SerializeField]
+    private GameState currentState;
+    public GameState CurrentState
+    {
+        get => currentState;
+        private set => currentState = value;
+    }
 
     [Header("Battle Configuration")]
     public BattleMode battleMode = BattleMode.OneVsOne;
 
-    public GameState CurrentState { get; private set; }
     public BattleMode CurrentBattleMode { get; private set; }
+
+    [Header("Starting State (Inspector)")]
+    public GameState startingState = GameState.DeckSetup;
 
     private void Awake()
     {
@@ -22,6 +30,7 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+
         SetGameState(startingState);
         SetBattleMode(battleMode);
     }
@@ -57,4 +66,13 @@ public enum BattleMode
     OneVsOne = 1,
     ThreeVsThree = 3,
     SixVsSix = 6
+}
+
+public enum GameState
+{
+    DeckSetup,
+    BattlePhase,
+    TurnEnd,
+    GameOver,
+    CardInspector
 }

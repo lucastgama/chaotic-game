@@ -18,6 +18,12 @@ public class BattleGridManager : MonoBehaviour
     private List<GameObject> battleGrid = new List<GameObject>();
     private Dictionary<int, List<Vector2>> formationLayouts = new Dictionary<int, List<Vector2>>();
 
+    // Armazenar valores anteriores para detectar mudanças
+    private float lastHorizontalSpacing;
+    private float lastVerticalSpacing;
+    private float lastTeamDistance;
+    private float lastGridHeight;
+
     void Awake()
     {
         formationLayouts[1] = new List<Vector2> { new Vector2(0, 0) };
@@ -54,6 +60,12 @@ public class BattleGridManager : MonoBehaviour
             new Vector2(0.97f, 2), // Terceira linha
             new Vector2(0, 3.045f) // Linha da frente
         };
+
+        // Inicializar valores anteriores
+        lastHorizontalSpacing = horizontalSpacing;
+        lastVerticalSpacing = verticalSpacing;
+        lastTeamDistance = teamDistance;
+        lastGridHeight = gridHeight;
     }
 
     void Start()
@@ -64,6 +76,34 @@ public class BattleGridManager : MonoBehaviour
         }
 
         GenerateGrid(gridSize);
+    }
+
+    void Update()
+    {
+        // Verificar se algum valor mudou
+        if (HasSpacingChanged())
+        {
+            // Atualizar grid se estiver em modo de desenvolvimento
+#if UNITY_EDITOR
+            if (gridSize > 0)
+            {
+                GenerateGrid(gridSize);
+            }
+#endif
+            // Atualizar valores anteriores
+            UpdateLastValues();
+        }
+    }
+
+    // Alternativa: usar OnValidate para atualizar apenas no Editor
+    void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (Application.isPlaying && gridSize > 0)
+        {
+            GenerateGrid(gridSize);
+        }
+#endif
     }
 
     public void GenerateGrid(int size)
@@ -113,4 +153,19 @@ public class BattleGridManager : MonoBehaviour
         battleGrid.Clear();
     }
 
+    private bool HasSpacingChanged()
+    {
+        return lastHorizontalSpacing != horizontalSpacing
+            || lastVerticalSpacing != verticalSpacing
+            || lastTeamDistance != teamDistance
+            || lastGridHeight != gridHeight;
+    }
+
+    private void UpdateLastValues()
+    {
+        lastHorizontalSpacing = horizontalSpacing;
+        lastVerticalSpacing = verticalSpacing;
+        lastTeamDistance = teamDistance;
+        lastGridHeight = gridHeight;
+    }
 }
