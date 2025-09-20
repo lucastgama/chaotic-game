@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
                 return 1;
         }
     }
+
+    public int GetCurrentBattleModeValue()
+    {
+        return (int)battleMode;
+    }
 }
 
 public enum BattleMode

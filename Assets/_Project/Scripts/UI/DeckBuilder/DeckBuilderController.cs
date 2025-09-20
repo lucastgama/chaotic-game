@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,41 +25,34 @@ public class DeckBuilderController : MonoBehaviour
     [Header("Iniciar jogo")]
     public Button startGameButton;
 
+    [Header("Carregar Deck Salvo")]
+    public TMP_Dropdown savedDecksDropdown;
+    public Button loadDeckButton;
+
     void Start()
     {
         ShowInterface();
         LoadPlayerData();
         SetupButtonListeners();
+        PopulateSavedDecksDropdown();
         ShowAllCards();
     }
 
     void ShowInterface()
     {
-        if (GameManager.Instance == null)
-        {
-            Debug.LogWarning("GameManager.Instance é null!");
-            return;
-        }
-
         var currentState = GameManager.Instance.CurrentState;
         var battleMode = GameManager.Instance.battleMode;
         var currentBattleMode = GameManager.Instance.CurrentBattleMode;
-
-        Debug.Log($"Estado atual: {currentState}");
-        Debug.Log($"BattleMode: {battleMode}");
-        Debug.Log($"CurrentBattleMode: {currentBattleMode}");
 
         bool shouldShowObject = currentState == GameState.DeckSetup;
 
         if (shouldShowObject)
         {
             this.gameObject.SetActive(true);
-            Debug.Log("Mostrando interface do DeckBuilder");
         }
         else
         {
             this.gameObject.SetActive(false);
-            Debug.Log("Escondendo interface do DeckBuilder");
         }
     }
 
@@ -93,6 +87,383 @@ public class DeckBuilderController : MonoBehaviour
 
         if (startGameButton != null)
             startGameButton.onClick.AddListener(() => startGame());
+
+        if (loadDeckButton != null)
+            loadDeckButton.onClick.AddListener(() => LoadSelectedDeck());
+    }
+
+    void PopulateSavedDecksDropdown()
+    {
+        if (savedDecksDropdown == null || playerData?.decks == null)
+            return;
+
+        savedDecksDropdown.ClearOptions();
+
+        int currentBattleMode = GameManager.Instance.GetCurrentBattleModeValue();
+
+        List<string> deckOptions = new List<string>();
+        deckOptions.Add("-- Selecione um Deck --");
+
+        List<SavedDeck> validDecks = GetValidDecksForCurrentBattleMode(currentBattleMode);
+
+        foreach (var deck in validDecks)
+        {
+            deckOptions.Add(deck.name);
+        }
+
+        savedDecksDropdown.AddOptions(deckOptions);
+    }
+
+    List<SavedDeck> GetValidDecksForCurrentBattleMode(int battleMode)
+    {
+        List<SavedDeck> validDecks = new List<SavedDeck>();
+
+        if (playerData?.decks == null)
+            return validDecks;
+
+        string deckCategory = GetDeckCategoryByBattleMode(battleMode);
+
+        switch (deckCategory)
+        {
+            case "solo":
+                if (playerData.decks.solo != null)
+                {
+                    foreach (var deck in playerData.decks.solo)
+                    {
+                        if (deck.battleMode == battleMode)
+                            validDecks.Add(deck);
+                    }
+                }
+                break;
+
+            case "trio":
+                if (playerData.decks.trio != null)
+                {
+                    foreach (var deck in playerData.decks.trio)
+                    {
+                        if (deck.battleMode == battleMode)
+                            validDecks.Add(deck);
+                    }
+                }
+                break;
+
+            case "squad":
+                if (playerData.decks.squad != null)
+                {
+                    foreach (var deck in playerData.decks.squad)
+                    {
+                        if (deck.battleMode == battleMode)
+                            validDecks.Add(deck);
+                    }
+                }
+                break;
+        }
+
+        return validDecks;
+    }
+
+    string GetDeckCategoryByBattleMode(int battleMode)
+    {
+        switch (battleMode)
+        {
+            case 1:
+                return "solo";
+            case 3:
+                return "trio";
+            case 6:
+                return "squad";
+            default:
+                return "solo";
+        }
+    }
+
+    void LoadSelectedDeck()
+    {
+        if (savedDecksDropdown == null || savedDecksDropdown.value == 0)
+        {
+            return;
+        }
+
+        int currentBattleMode = GameManager.Instance.GetCurrentBattleModeValue();
+        List<SavedDeck> validDecks = GetValidDecksForCurrentBattleMode(currentBattleMode);
+
+        int deckIndex = savedDecksDropdown.value - 1;
+
+        if (deckIndex >= 0 && deckIndex < validDecks.Count)
+        {
+            SavedDeck selectedDeck = validDecks[deckIndex];
+            LoadDeckIntoBuilder(selectedDeck);
+        }
+    }
+
+    void LoadDeckIntoBuilder(SavedDeck deck)
+    {
+        ClearCurrentDeck();
+
+        foreach (var cardEntry in deck.cards)
+        {
+            LoadSingleCardIntoDropZone(cardEntry);
+        }
+
+        RefreshCardDisplay();
+    }
+
+    void ClearCurrentDeck()
+    {
+        DropZone[] allDropZones = FindObjectsByType<DropZone>(FindObjectsSortMode.None);
+
+        foreach (var dropZone in allDropZones)
+        {
+            if (!dropZone.isListType && dropZone.IsOccupied())
+            {
+                if (dropZone.currentCardDisplay != null)
+                {
+                    var viewer = dropZone.currentCardDisplay.GetComponent<CardViewerBuild>();
+                    if (viewer != null)
+                    {
+                        var originalDraggable = FindCardDraggableByAsset(dropZone.currentCardAsset);
+                        if (originalDraggable != null)
+                        {
+                            dropZone.OnRemoveCard(viewer, originalDraggable);
+                        }
+                    }
+                }
+            }
+            else if (dropZone.isListType)
+            {
+                while (dropZone.GetListCount() > 0)
+                {
+                    var listCards = dropZone.listCards;
+                    var listAssets = dropZone.listCardAssets;
+
+                    if (listCards.Count > 0 && listAssets.Count > 0)
+                    {
+                        var cardAsset = listAssets[0];
+                        var cardUI = listCards[0];
+                        var originalDraggable = FindCardDraggableByAsset(cardAsset);
+
+                        if (originalDraggable != null)
+                        {
+                            dropZone.OnRemoveFromList(cardUI, cardAsset, originalDraggable);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void LoadSingleCardIntoDropZone(SavedCardEntry cardEntry)
+    {
+        var collectionEntry = playerData.collection.Find(c => c.cardId == cardEntry.cardId);
+        if (collectionEntry == null || collectionEntry.qty <= 0)
+        {
+            return;
+        }
+
+        DropZone targetDropZone = FindDropZoneByPosition(cardEntry.position);
+        if (targetDropZone == null)
+        {
+            Debug.LogWarning($"DropZone não encontrada para posição: {cardEntry.position}");
+            return;
+        }
+
+        CardDraggable cardDraggable = FindCardDraggableByCardId(cardEntry.cardId);
+        if (cardDraggable == null)
+        {
+            Debug.LogWarning($"CardDraggable não encontrado para carta: {cardEntry.cardId}");
+            return;
+        }
+
+        SimulateCardDrop(cardDraggable, targetDropZone);
+    }
+
+    void SimulateCardDrop(CardDraggable draggable, DropZone dropZone)
+    {
+        string cardCode = GetCardCode(draggable.cardAsset);
+
+        DeckManager deckManager = FindFirstObjectByType<DeckManager>();
+        if (deckManager != null && !deckManager.CanAddCard(cardCode, dropZone.dropZoneId))
+        {
+            return;
+        }
+
+        if (dropZone.isListType)
+        {
+            if (deckManager != null)
+            {
+                deckManager.AddCardToList(dropZone.dropZoneId, cardCode);
+            }
+
+            dropZone.listCardAssets.Add(draggable.cardAsset);
+
+            GameObject cardUI = Instantiate(
+                dropZone.cardUIPrefab != null ? dropZone.cardUIPrefab : draggable.gameObject,
+                dropZone.listContainer
+            );
+
+            var newDraggable = cardUI.GetComponent<CardDraggable>();
+            if (newDraggable != null)
+            {
+                Destroy(newDraggable);
+            }
+
+            var viewer = cardUI.GetComponent<CardViewerBuild>();
+            if (viewer != null)
+            {
+                viewer.Initialize(draggable.cardAsset, 1, true);
+                viewer.removeBtn.onClick.RemoveAllListeners();
+                viewer.removeBtn.onClick.AddListener(
+                    () => dropZone.OnRemoveFromList(cardUI, draggable.cardAsset, draggable)
+                );
+            }
+
+            dropZone.listCards.Add(cardUI);
+            draggable.DecreaseQuantity();
+        }
+        else
+        {
+            if (dropZone.IsOccupied())
+            {
+                Debug.LogWarning($"DropZone {dropZone.dropZoneId} já está ocupada");
+                return;
+            }
+
+            if (deckManager != null)
+            {
+                deckManager.InsertCard(dropZone.dropZoneId, cardCode);
+            }
+
+            dropZone.currentCardAsset = draggable.cardAsset;
+            dropZone.assignedCreatureId = cardCode;
+
+            dropZone.currentCardDisplay = Instantiate(draggable.gameObject, dropZone.transform);
+            Destroy(dropZone.currentCardDisplay.GetComponent<CardDraggable>());
+
+            var viewer = dropZone.currentCardDisplay.GetComponent<CardViewerBuild>();
+            if (viewer != null)
+            {
+                viewer.Initialize(dropZone.currentCardAsset, 1, true);
+                RectTransform rect = viewer.GetComponent<RectTransform>();
+                rect.anchorMin = new Vector2(0.5f, 0.5f);
+                rect.anchorMax = new Vector2(0.5f, 0.5f);
+                rect.pivot = new Vector2(0.5f, 0.5f);
+                draggable.DecreaseQuantity();
+                viewer.removeBtn.onClick.AddListener(
+                    () => dropZone.OnRemoveCard(viewer, draggable)
+                );
+            }
+        }
+    }
+
+    DropZone FindDropZoneByPosition(string position)
+    {
+        DropZone[] allDropZones = FindObjectsByType<DropZone>(FindObjectsSortMode.None);
+
+        foreach (var dropZone in allDropZones)
+        {
+            if (dropZone.dropZoneId == position)
+            {
+                return dropZone;
+            }
+        }
+
+        return null;
+    }
+
+    CardDraggable FindCardDraggableByCardId(string cardId)
+    {
+        CardDraggable[] allDraggables = FindObjectsByType<CardDraggable>(FindObjectsSortMode.None);
+
+        foreach (var draggable in allDraggables)
+        {
+            string draggableCardId = GetCardCode(draggable.cardAsset);
+            if (draggableCardId == cardId)
+            {
+                return draggable;
+            }
+        }
+
+        foreach (var draggable in allDraggables)
+        {
+            if (draggable.cardAsset != null)
+            {
+                if (draggable.cardAsset is Creature c && c.cardCode == cardId)
+                    return draggable;
+                if (draggable.cardAsset is Attack a && a.cardCode == cardId)
+                    return draggable;
+                if (draggable.cardAsset is Battlegear b && b.cardCode == cardId)
+                    return draggable;
+                if (draggable.cardAsset is Location l && l.cardCode == cardId)
+                    return draggable;
+                if (draggable.cardAsset is Mugic m && m.cardCode == cardId)
+                    return draggable;
+            }
+        }
+
+        return null;
+    }
+
+    CardDraggable FindCardDraggableByAsset(ScriptableObject asset)
+    {
+        CardDraggable[] allDraggables = FindObjectsByType<CardDraggable>(FindObjectsSortMode.None);
+
+        foreach (var draggable in allDraggables)
+        {
+            if (draggable.cardAsset == asset)
+            {
+                return draggable;
+            }
+        }
+
+        return null;
+    }
+
+    string GetCardCode(ScriptableObject card)
+    {
+        if (card is Creature c)
+            return c.cardCode;
+        if (card is Attack a)
+            return a.cardCode;
+        if (card is Battlegear b)
+            return b.cardCode;
+        if (card is Location l)
+            return l.cardCode;
+        if (card is Mugic m)
+            return m.cardCode;
+        return "Unknown";
+    }
+
+    void RefreshCardDisplay()
+    {
+        RefreshCollectionCardsOnly();
+
+        UpdateCollectionQuantities();
+    }
+
+    void RefreshCollectionCardsOnly()
+    {
+        CardDraggable[] collectionDraggables =
+            creatureCardContainer.GetComponentsInChildren<CardDraggable>();
+
+        foreach (var draggable in collectionDraggables)
+        {
+            if (draggable != null)
+            {
+                draggable.UpdateVisual();
+            }
+        }
+    }
+
+    void UpdateCollectionQuantities()
+    {
+        DeckManager deckManager = FindFirstObjectByType<DeckManager>();
+        if (deckManager == null)
+            return;
+
+        foreach (var deckCard in deckManager.deckJson.cards)
+        {
+            var collectionEntry = playerData.collection.Find(c => c.cardId == deckCard.cardId);
+        }
     }
 
     void PrintCollectionToConsole()
@@ -311,6 +682,31 @@ public class PlayerData
     public string id;
     public string nickname;
     public List<CollectionEntry> collection;
+    public PlayerDecks decks;
+}
+
+[System.Serializable]
+public class PlayerDecks
+{
+    public List<SavedDeck> solo;
+    public List<SavedDeck> trio;
+    public List<SavedDeck> squad;
+}
+
+[System.Serializable]
+public class SavedDeck
+{
+    public string id;
+    public string name;
+    public int battleMode;
+    public List<SavedCardEntry> cards;
+}
+
+[System.Serializable]
+public class SavedCardEntry
+{
+    public string cardId;
+    public string position;
 }
 
 [System.Serializable]

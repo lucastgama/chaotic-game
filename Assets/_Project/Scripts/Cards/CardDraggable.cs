@@ -116,7 +116,7 @@ public class CardDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         UpdateVisual();
     }
 
-    void UpdateVisual()
+    public void UpdateVisual()
     {
         var images = GetComponentsInChildren<Image>();
         if (images != null)

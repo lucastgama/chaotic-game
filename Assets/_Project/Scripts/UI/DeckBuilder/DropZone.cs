@@ -17,11 +17,23 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public Transform listContainer;
     public GameObject cardUIPrefab;
 
-    private GameObject currentCardDisplay;
-    private ScriptableObject currentCardAsset;
+    private GameObject _currentCardDisplay;
+    private ScriptableObject _currentCardAsset;
 
-    private List<GameObject> listCards = new List<GameObject>();
-    private List<ScriptableObject> listCardAssets = new List<ScriptableObject>();
+    public List<GameObject> listCards = new List<GameObject>();
+    public List<ScriptableObject> listCardAssets = new List<ScriptableObject>();
+
+    public GameObject currentCardDisplay
+    {
+        get { return _currentCardDisplay; }
+        set { _currentCardDisplay = value; }
+    }
+
+    public ScriptableObject currentCardAsset
+    {
+        get { return _currentCardAsset; }
+        set { _currentCardAsset = value; }
+    }
 
     void Start()
     {
